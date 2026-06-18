@@ -5,6 +5,7 @@ import { IconBrandWhatsapp, IconArrowLeft, IconClock } from '@tabler/icons-react
 import { createClient } from '@/lib/supabase/server'
 import { ServiceCard } from '@/components/public'
 import type { Service } from '@/types/database.types'
+import { safeImageSrc } from '@/lib/utils'
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -65,9 +66,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-[var(--spacing-gutter)]">
           {/* Image */}
           <div className="relative aspect-video bg-surface-card border border-white/10 overflow-hidden">
-            {service.image ? (
+            {safeImageSrc(service.image) ? (
               <Image
-                src={service.image}
+                src={safeImageSrc(service.image)!}
                 alt={service.name}
                 fill
                 className="object-cover"

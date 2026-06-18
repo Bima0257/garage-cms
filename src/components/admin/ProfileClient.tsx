@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { userUpdateSchema, type UserUpdateFormData } from '@/lib/validations/user'
 import { useRouter } from 'next/navigation'
+import { safeImageSrc } from '@/lib/utils'
 import { IconUser, IconLock, IconEye, IconEyeOff } from '@tabler/icons-react'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
@@ -134,9 +135,9 @@ export function ProfileClient({ userId, initialUser }: ProfileClientProps) {
         {/* Header */}
         <div className="flex items-center gap-4 mb-8 pb-6 border-b border-white/10">
           <div className="w-20 h-20 bg-surface-elevated border border-outline-variant flex items-center justify-center">
-            {initialUser.photo ? (
+            {safeImageSrc(initialUser.photo) ? (
               <Image
-                src={initialUser.photo}
+                src={safeImageSrc(initialUser.photo)!}
                 alt={initialUser.name}
                 width={80}
                 height={80}

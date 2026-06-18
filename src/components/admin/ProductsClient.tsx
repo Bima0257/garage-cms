@@ -8,6 +8,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { DataTable, FormDialog, ActionButtons } from '@/components/admin'
 import { productSchema } from '@/lib/validations/product'
 import type { Product, ProductCategory } from '@/types/database.types'
+import { safeImageSrc } from '@/lib/utils'
 
 interface ProductsClientProps {
   initialProducts: Product[]
@@ -27,9 +28,9 @@ export function ProductsClient({ initialProducts, categories }: ProductsClientPr
       header: 'Gambar',
       cell: ({ row }) => (
         <div className="w-16 h-12 bg-surface border border-outline-variant overflow-hidden">
-          {row.original.image ? (
+          {safeImageSrc(row.original.image) ? (
             <Image
-              src={row.original.image}
+              src={safeImageSrc(row.original.image)!}
               alt={row.original.name}
               width={64}
               height={48}

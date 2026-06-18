@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { IconBrandWhatsapp, IconClock } from '@tabler/icons-react'
 import type { Service } from '@/types/database.types'
+import { safeImageSrc } from '@/lib/utils'
 
 interface ServiceCardProps {
   service: Service
@@ -24,9 +25,9 @@ export function ServiceCard({ service, whatsapp, onWhatsAppClick }: ServiceCardP
     <div className="bg-surface-card border border-white/10 group relative overflow-hidden transition-all duration-500 hover:border-primary/30">
       {/* Image */}
       <div className="relative aspect-video overflow-hidden">
-        {service.image ? (
+        {safeImageSrc(service.image) ? (
           <Image
-            src={service.image}
+            src={safeImageSrc(service.image)!}
             alt={service.name}
             fill
             className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"

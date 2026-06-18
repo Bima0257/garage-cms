@@ -5,6 +5,7 @@ import { IconBrandWhatsapp, IconArrowLeft } from '@tabler/icons-react'
 import { createClient } from '@/lib/supabase/server'
 import { ProductCard } from '@/components/public'
 import type { Product } from '@/types/database.types'
+import { safeImageSrc } from '@/lib/utils'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -72,9 +73,9 @@ export default async function ProductDetailPage({ params }: PageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-[var(--spacing-gutter)]">
           {/* Image */}
           <div className="relative aspect-square bg-surface-card border border-white/10 overflow-hidden">
-            {product.image ? (
+            {safeImageSrc(product.image) ? (
               <Image
-                src={product.image}
+                src={safeImageSrc(product.image)!}
                 alt={product.name}
                 fill
                 className="object-cover"

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
+import { safeImageSrc } from '@/lib/utils'
 import {
   IconLayoutDashboard,
   IconPackage,
@@ -222,9 +223,9 @@ export function AdminSidebar({ user }: SidebarProps) {
       {/* User & Logout */}
       <div className="px-6 py-4 border-t border-outline-variant">
         <div className="flex items-center gap-3 mb-4">
-          {user?.photo ? (
+          {safeImageSrc(user?.photo) ? (
             <Image
-              src={user.photo}
+              src={safeImageSrc(user.photo)!}
               alt={user.name || 'Admin'}
               width={40}
               height={40}

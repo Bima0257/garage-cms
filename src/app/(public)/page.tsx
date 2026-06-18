@@ -4,6 +4,7 @@ import { IconArrowForward } from '@tabler/icons-react'
 import { createClient } from '@/lib/supabase/server'
 import { ProductCard, ServiceCard } from '@/components/public'
 import type { Hero, Product, Service, About, Settings } from '@/types/database.types'
+import { safeImageSrc } from '@/lib/utils'
 
 export default async function HomePage() {
   const supabase = await createClient()
@@ -55,7 +56,7 @@ export default async function HomePage() {
         <div className="absolute inset-0 z-0">
           {heroes && heroes.length > 0 ? (
             <Image
-              src={heroes[0].image || 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=1920'}
+              src={safeImageSrc(heroes[0].image) || 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=1920'}
               alt={heroes[0].title}
               fill
               className="object-cover grayscale-[0.4] contrast-[1.1]"
@@ -193,9 +194,9 @@ export default async function HomePage() {
           <div className="max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-[var(--spacing-gutter)] items-center">
             <div className="relative group">
               <div className="absolute -inset-2 md:-inset-4 border border-primary/20 -z-10 group-hover:inset-0 transition-all duration-500" />
-              {about.image ? (
+              {safeImageSrc(about.image) ? (
                 <Image
-                  src={about.image}
+                  src={safeImageSrc(about.image)!}
                   alt={about.name}
                   width={600}
                   height={500}

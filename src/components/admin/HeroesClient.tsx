@@ -8,6 +8,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { DataTable, FormDialog, ActionButtons } from '@/components/admin'
 import { heroSchema } from '@/lib/validations/hero'
 import type { Hero } from '@/types/database.types'
+import { safeImageSrc } from '@/lib/utils'
 
 interface HeroesClientProps {
   initialHeroes: Hero[]
@@ -26,9 +27,9 @@ export function HeroesClient({ initialHeroes }: HeroesClientProps) {
       header: 'Gambar',
       cell: ({ row }) => (
         <div className="w-20 h-12 bg-surface border border-outline-variant overflow-hidden">
-          {row.original.image ? (
+          {safeImageSrc(row.original.image) ? (
             <Image
-              src={row.original.image}
+              src={safeImageSrc(row.original.image)!}
               alt={row.original.title}
               width={80}
               height={48}

@@ -8,6 +8,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { DataTable, FormDialog, ActionButtons } from '@/components/admin'
 import { modalPromotionSchema } from '@/lib/validations/modal-promotion'
 import type { ModalPromotion } from '@/types/database.types'
+import { safeImageSrc } from '@/lib/utils'
 
 interface ModalPromotionsClientProps {
   initialPromotions: ModalPromotion[]
@@ -34,9 +35,9 @@ export function ModalPromotionsClient({ initialPromotions }: ModalPromotionsClie
       header: 'Gambar',
       cell: ({ row }) => (
         <div className="w-20 h-12 bg-surface border border-outline-variant overflow-hidden">
-          {row.original.image ? (
+          {safeImageSrc(row.original.image) ? (
             <Image
-              src={row.original.image}
+              src={safeImageSrc(row.original.image)!}
               alt={row.original.title}
               width={80}
               height={48}

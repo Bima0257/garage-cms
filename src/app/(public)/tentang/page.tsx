@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { IconMapPin, IconPhone, IconMail, IconBrandWhatsapp } from '@tabler/icons-react'
 import { createClient } from '@/lib/supabase/server'
 import type { About, SocialMedia } from '@/types/database.types'
+import { safeImageSrc } from '@/lib/utils'
 
 export default async function AboutPage() {
   const supabase = await createClient()
@@ -31,9 +32,9 @@ export default async function AboutPage() {
           {/* Image */}
           <div className="lg:col-span-5 relative group order-1">
             <div className="absolute -inset-2 md:-inset-4 border border-primary/20 -z-10 group-hover:inset-0 transition-all duration-500" />
-            {about?.image ? (
+            {safeImageSrc(about?.image) ? (
               <Image
-                src={about.image}
+                src={safeImageSrc(about.image)!}
                 alt={about.name}
                 width={600}
                 height={500}

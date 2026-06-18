@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { IconBrandWhatsapp } from '@tabler/icons-react'
 import type { Product } from '@/types/database.types'
+import { safeImageSrc } from '@/lib/utils'
 
 interface ProductCardProps {
   product: Product
@@ -34,9 +35,9 @@ export function ProductCard({ product, whatsapp, onWhatsAppClick }: ProductCardP
     <div className="bg-surface-card border border-white/10 group relative overflow-hidden transition-all duration-500 hover:border-primary/30">
       {/* Image */}
       <div className="relative aspect-square overflow-hidden">
-        {product.image ? (
+        {safeImageSrc(product.image) ? (
           <Image
-            src={product.image}
+            src={safeImageSrc(product.image)!}
             alt={product.name}
             fill
             className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"

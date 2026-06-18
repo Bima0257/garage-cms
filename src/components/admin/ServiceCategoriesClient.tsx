@@ -8,6 +8,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { DataTable, FormDialog, ActionButtons } from '@/components/admin'
 import { serviceCategorySchema } from '@/lib/validations/service-category'
 import type { ServiceCategory } from '@/types/database.types'
+import { safeImageSrc } from '@/lib/utils'
 
 interface ServiceCategoriesClientProps {
   initialCategories: ServiceCategory[]
@@ -26,9 +27,9 @@ export function ServiceCategoriesClient({ initialCategories }: ServiceCategories
       header: 'Gambar',
       cell: ({ row }) => (
         <div className="w-16 h-12 bg-surface border border-outline-variant overflow-hidden">
-          {row.original.image ? (
+          {safeImageSrc(row.original.image) ? (
             <Image
-              src={row.original.image}
+              src={safeImageSrc(row.original.image)!}
               alt={row.original.name}
               width={64}
               height={48}
