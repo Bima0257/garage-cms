@@ -1,26 +1,208 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* STEED Design System - Dark Mode Industrial Theme */
+@theme {
+  /* Colors - Surface */
+  --color-surface-container-highest: #353534;
+  --color-surface-card: #161616;
+  --color-surface-elevated: #1F1F1F;
+  --color-surface-container-low: #1c1b1b;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-container-high: #2a2a2a;
+  --color-surface-bright: #3a3939;
+  --color-surface-variant: #353534;
+  --color-surface-dim: #131313;
+  --color-surface: #131313;
+
+  /* Colors - Primary (Amber/Orange) */
+  --color-primary-container: #f2a93b;
+  --color-primary-fixed-dim: #ffb956;
+  --color-primary-fixed: #ffddb5;
+  --color-primary: #ffca85;
+  --color-primary-tint: #ffb956;
+  --color-on-primary: #452b00;
+  --color-on-primary-fixed: #2a1800;
+  --color-on-primary-fixed-variant: #633f00;
+  --color-on-primary-container: #664000;
+  --color-inverse-primary: #835400;
+
+  /* Colors - Secondary */
+  --color-secondary-container: #b73b01;
+  --color-secondary-fixed-dim: #ffb59c;
+  --color-secondary-fixed: #ffdbcf;
+  --color-secondary: #ffb59c;
+  --color-on-secondary: #5c1900;
+  --color-on-secondary-container: #ffddd2;
+  --color-on-secondary-fixed: #390c00;
+  --color-on-secondary-fixed-variant: #822700;
+
+  /* Colors - Tertiary */
+  --color-tertiary-container: #62c0ff;
+  --color-tertiary-fixed-dim: #8ccdff;
+  --color-tertiary-fixed: #cae6ff;
+  --color-tertiary: #a9d9ff;
+  --color-on-tertiary: #00344e;
+  --color-on-tertiary-container: #004d72;
+  --color-on-tertiary-fixed: #001e2f;
+  --color-on-tertiary-fixed-variant: #004b6f;
+
+  /* Colors - Text */
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #8A8A8A;
+  --color-text-muted: #5A5A5A;
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: #d6c3af;
+  --color-on-background: #e5e2e1;
+  --color-inverse-surface: #e5e2e1;
+  --color-inverse-on-surface: #313030;
+
+  /* Colors - Utility */
+  --color-background: #131313;
+  --color-outline: #9e8e7c;
+  --color-outline-variant: #514535;
+  --color-accent-red: #E8542A;
+  --color-whatsapp-green: #25D366;
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+  --color-on-error: #690005;
+  --color-on-error-container: #ffdad6;
+
+  /* Typography */
+  --font-headline-lg: 'Archivo Narrow', sans-serif;
+  --font-headline-md: 'Archivo Narrow', sans-serif;
+  --font-headline-lg-mobile: 'Archivo Narrow', sans-serif;
+  --font-display-lg: 'Archivo Narrow', sans-serif;
+  --font-display-ghost: 'Archivo Narrow', sans-serif;
+  --font-body-lg: 'Hanken Grotesk', sans-serif;
+  --font-body-md: 'Hanken Grotesk', sans-serif;
+  --font-label-technical: 'JetBrains Mono', monospace;
+
+  /* Font Sizes */
+  --font-size-headline-lg-mobile: 32px;
+  --font-size-label-technical: 12px;
+  --font-size-headline-md: 24px;
+  --font-size-display-ghost: 120px;
+  --font-size-display-lg: 80px;
+  --font-size-headline-lg: 48px;
+  --font-size-body-lg: 18px;
+  --font-size-body-md: 16px;
+
+  /* Spacing */
+  --spacing-unit: 8px;
+  --spacing-gutter: 24px;
+  --spacing-container-max: 1440px;
+  --spacing-margin-mobile: 20px;
+  --spacing-margin-desktop: 64px;
+
+  /* Border Radius */
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #131313;
+  color: #e5e2e1;
+  font-family: 'Hanken Grotesk', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Material Symbols Outlined */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+/* Ghost text effect */
+.ghost-text, .outline-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+  color: transparent;
+  user-select: none;
+}
+
+/* Gradient blobs */
+.gradient-blob {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.blob-orange {
+  background: #f2a93b;
+  top: -10%;
+  right: -5%;
+}
+
+.blob-red {
+  background: #e8542a;
+  bottom: -10%;
+  left: -5%;
+}
+
+/* Amber glow effect */
+.amber-glow, .glow-amber {
+  box-shadow: 0 0 24px 0 rgba(242, 169, 59, 0.15);
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #131313;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #f2a93b;
+}
+
+/* Technical grid background */
+.technical-grid {
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px
+    );
+  background-size: 40px 40px;
+}
+
+/* Selection styling */
+::selection {
+  background-color: #ffb956;
+  color: #452b00;
+}
+
+/* Focus outline */
+:focus-visible {
+  outline: 2px solid #f2a93b;
+  outline-offset: 2px;
+}
+
+/* Transition defaults */
+* {
+  transition-property: color, background-color, border-color, transform, opacity, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
