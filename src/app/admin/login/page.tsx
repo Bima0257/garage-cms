@@ -4,12 +4,12 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { IconLock, IconUser } from '@tabler/icons-react'
 import Swal from 'sweetalert2'
 import { loginSchema, type LoginFormData } from '@/lib/validations'
 
-export default function AdminLoginPage() {
+function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/admin'
@@ -35,8 +35,8 @@ export default function AdminLoginPage() {
       if (result?.error) {
         Swal.fire({
           icon: 'error',
-          title: 'Login Failed',
-          text: 'Invalid username or password',
+          title: 'Login Gagal',
+          text: 'Username atau password salah',
           confirmButtonColor: '#f2a93b',
         })
       } else {
@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'An unexpected error occurred',
+        text: 'Terjadi kesalahan yang tidak terduga',
         confirmButtonColor: '#f2a93b',
       })
     } finally {
@@ -93,7 +93,7 @@ export default function AdminLoginPage() {
               <input
                 {...register('username')}
                 type="text"
-                placeholder="Enter your username"
+                placeholder="Masukkan username"
                 className="w-full bg-transparent border-none text-text-primary py-3 pl-8 placeholder:text-text-muted focus:ring-0 font-[var(--font-label-technical)]"
               />
             </div>
@@ -129,7 +129,7 @@ export default function AdminLoginPage() {
             disabled={isLoading}
             className="w-full bg-primary text-on-primary py-5 font-[var(--font-headline-md)] text-[var(--font-size-headline-md)] font-bold uppercase tracking-widest hover:shadow-[0_0_30px_rgba(242,169,59,0.25)] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50"
           >
-            {isLoading ? 'Signing In...' : 'Sign In'}
+            {isLoading ? 'Memproses...' : 'Masuk'}
             {!isLoading && <span className="material-symbols-outlined">arrow_forward</span>}
           </button>
         </form>
@@ -145,5 +145,13 @@ export default function AdminLoginPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function AdminLoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   )
 }
