@@ -10,7 +10,7 @@ import { loginSchema, type LoginFormData } from '@/lib/validations'
 
 function LoginForm() {
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl') || '/admin'
+  const callbackUrl = searchParams.get('callbackUrl') || '/admin/dashboard'
   const [isLoading, setIsLoading] = useState(false)
 
   const {

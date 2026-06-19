@@ -44,7 +44,7 @@ interface SidebarProps {
 const navGroups: NavGroup[] = [
   {
     items: [
-      { href: '/admin', label: 'Dashboard', icon: IconLayoutDashboard },
+      { href: '/admin/dashboard', label: 'Dashboard', icon: IconLayoutDashboard },
     ],
   },
   {
@@ -115,8 +115,8 @@ export function AdminSidebar({ user }: SidebarProps) {
   }
 
   const isActive = (href: string) => {
-    if (href === '/admin') {
-      return pathname === '/admin'
+    if (href === '/admin/dashboard') {
+      return pathname === '/admin/dashboard'
     }
     return pathname.startsWith(href)
   }
@@ -125,7 +125,7 @@ export function AdminSidebar({ user }: SidebarProps) {
     <aside className="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface flex flex-col z-50">
       {/* Logo */}
       <div className="px-6 py-8">
-        <Link href="/admin">
+        <Link href="/admin/dashboard">
           <h1 className="font-[var(--font-headline-md)] text-[var(--font-size-headline-md)] font-bold text-primary uppercase tracking-wider">
             STEED ADMIN
           </h1>
