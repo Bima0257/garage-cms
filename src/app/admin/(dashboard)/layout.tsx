@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
-import { auth } from '@/lib/auth'
+import { cookies } from 'next/headers'
+import { getToken } from 'next-auth/jwt'
 import { AdminSidebar, AdminHeader } from '@/components/admin'
 
 export default async function AdminDashboardLayout({
@@ -7,16 +8,21 @@ export default async function AdminDashboardLayout({
 }: {
   children: React.ReactNode
 }) {
-  const session = await auth()
+  const cookieStore = await cookies()
+  const token = await getToken({
+    req: { headers: { cookie: cookieStore.toString() } },
+    secret: process.env.AUTH_SECRET ?? process.env.NEXTAUTH_SECRET,
+    secureCookie: true,
+  })
 
-  if (!session) {
+  if (!token) {
     redirect('/admin/login')
   }
 
   return (
     <div className="min-h-screen bg-background">
       {/* Sidebar */}
-      <AdminSidebar user={session.user} />
+      <AdminSidebar user={token} />
 
       {/* Main Content */}
       <main className="ml-64 min-h-screen">

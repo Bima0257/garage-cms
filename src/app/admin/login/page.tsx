@@ -3,14 +3,13 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { useState, Suspense } from 'react'
 import { IconLock, IconUser } from '@tabler/icons-react'
 import Swal from 'sweetalert2'
 import { loginSchema, type LoginFormData } from '@/lib/validations'
 
 function LoginForm() {
-  const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/admin'
   const [isLoading, setIsLoading] = useState(false)
@@ -40,8 +39,7 @@ function LoginForm() {
           confirmButtonColor: '#f2a93b',
         })
       } else {
-        router.push(callbackUrl)
-        router.refresh()
+        window.location.assign(callbackUrl)
       }
     } catch {
       Swal.fire({
