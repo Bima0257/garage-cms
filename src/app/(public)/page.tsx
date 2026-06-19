@@ -56,7 +56,7 @@ export default async function HomePage() {
         <div className="absolute inset-0 z-0">
           {heroes && heroes.length > 0 ? (
             <Image
-              src={safeImageSrc(heroes[0].image) || 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=1920'}
+              src={safeImageSrc(heroes[0].image)}
               alt={heroes[0].title}
               fill
               className="object-cover grayscale-[0.4] contrast-[1.1]"
@@ -194,23 +194,13 @@ export default async function HomePage() {
           <div className="max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-[var(--spacing-gutter)] items-center">
             <div className="relative group">
               <div className="absolute -inset-2 md:-inset-4 border border-primary/20 -z-10 group-hover:inset-0 transition-all duration-500" />
-              {safeImageSrc(about.image) ? (
-                <Image
-                  src={safeImageSrc(about.image)!}
+              <Image
+                  src={safeImageSrc(about.image)}
                   alt={about.name}
                   width={600}
                   height={500}
                   className="w-full grayscale brightness-75 contrast-125 object-cover aspect-[4/3]"
                 />
-              ) : (
-                <Image
-                  src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=600"
-                  alt="About"
-                  width={600}
-                  height={500}
-                  className="w-full grayscale brightness-75 contrast-125 object-cover aspect-[4/3]"
-                />
-              )}
               <div className="absolute bottom-3 md:bottom-4 left-3 md:left-4 bg-primary text-on-primary px-3 md:px-4 py-2 font-[var(--font-label-technical)] text-[10px] md:text-[var(--font-size-label-technical)] uppercase tracking-widest">
                 EST. 2018 / BORN IN THE GARAGE
               </div>

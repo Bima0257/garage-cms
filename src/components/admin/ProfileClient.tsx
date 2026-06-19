@@ -135,9 +135,9 @@ export function ProfileClient({ userId, initialUser }: ProfileClientProps) {
         {/* Header */}
         <div className="flex items-center gap-4 mb-8 pb-6 border-b border-white/10">
           <div className="w-20 h-20 bg-surface-elevated border border-outline-variant flex items-center justify-center">
-            {safeImageSrc(initialUser.photo) ? (
+            {initialUser.photo ? (
               <Image
-                src={safeImageSrc(initialUser.photo)!}
+                src={safeImageSrc(initialUser.photo)}
                 alt={initialUser.name}
                 width={80}
                 height={80}

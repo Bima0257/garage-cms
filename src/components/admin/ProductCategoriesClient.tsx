@@ -37,19 +37,13 @@ export function ProductCategoriesClient({ initialCategories }: ProductCategories
       header: 'Gambar',
       cell: ({ row }) => (
         <div className="w-16 h-12 bg-surface border border-outline-variant overflow-hidden">
-          {safeImageSrc(row.original.image) ? (
-            <Image
-              src={safeImageSrc(row.original.image)!}
-              alt={row.original.name}
-              width={64}
-              height={48}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-text-muted text-xs">
-              No img
-            </div>
-          )}
+          <Image
+            src={safeImageSrc(row.original.image)}
+            alt={row.original.name}
+            width={64}
+            height={48}
+            className="w-full h-full object-cover"
+          />
         </div>
       ),
     },

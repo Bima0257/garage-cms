@@ -35,18 +35,12 @@ export function ProductCard({ product, whatsapp, onWhatsAppClick }: ProductCardP
     <div className="bg-surface-card border border-white/10 group relative overflow-hidden transition-all duration-500 hover:border-primary/30">
       {/* Image */}
       <div className="relative aspect-square overflow-hidden">
-        {safeImageSrc(product.image) ? (
-          <Image
-            src={safeImageSrc(product.image)!}
-            alt={product.name}
-            fill
-            className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-          />
-        ) : (
-          <div className="w-full h-full bg-surface-elevated flex items-center justify-center">
-            <span className="text-text-muted">Tidak Ada Gambar</span>
-          </div>
-        )}
+        <Image
+          src={safeImageSrc(product.image)}
+          alt={product.name}
+          fill
+          className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+        />
 
         {/* Stock Badge */}
         <span className={`absolute top-3 right-3 md:top-4 md:right-4 px-2 py-1 md:px-3 md:py-1 font-[var(--font-label-technical)] text-[9px] md:text-[10px] uppercase border ${stockInfo.className}`}>

@@ -222,9 +222,9 @@ export function AdminSidebar({ user }: SidebarProps) {
       {/* User & Logout */}
       <div className="px-6 py-4 border-t border-outline-variant">
         <div className="flex items-center gap-3 mb-4">
-          {safeImageSrc(user?.photo) ? (
+          {user?.photo ? (
             <Image
-              src={safeImageSrc(user?.photo)!}
+              src={safeImageSrc(user?.photo)}
               alt={user?.name ?? 'Admin'}
               width={40}
               height={40}

@@ -25,18 +25,12 @@ export function ServiceCard({ service, whatsapp, onWhatsAppClick }: ServiceCardP
     <div className="bg-surface-card border border-white/10 group relative overflow-hidden transition-all duration-500 hover:border-primary/30">
       {/* Image */}
       <div className="relative aspect-video overflow-hidden">
-        {safeImageSrc(service.image) ? (
-          <Image
-            src={safeImageSrc(service.image)!}
-            alt={service.name}
-            fill
-            className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-          />
-        ) : (
-          <div className="w-full h-full bg-surface-elevated flex items-center justify-center">
-            <span className="text-text-muted">Tidak Ada Gambar</span>
-          </div>
-        )}
+        <Image
+          src={safeImageSrc(service.image)}
+          alt={service.name}
+          fill
+          className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+        />
 
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent" />
