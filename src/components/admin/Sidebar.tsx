@@ -21,7 +21,6 @@ import {
   IconChevronDown,
   IconLogout,
 } from '@tabler/icons-react'
-import { signOut } from 'next-auth/react'
 
 interface NavItem {
   href: string
@@ -248,7 +247,7 @@ export function AdminSidebar({ user }: SidebarProps) {
           </div>
         </div>
         <button
-          onClick={() => signOut({ callbackUrl: '/admin/login' })}
+          onClick={async () => { await fetch('/api/auth/logout', { method: 'POST' }); window.location.assign('/admin/login') }}
           className="w-full flex items-center gap-3 px-4 py-2 text-text-secondary hover:text-primary hover:bg-surface-elevated transition-colors font-[var(--font-label-technical)] text-[var(--font-size-label-technical)] uppercase"
         >
           <IconLogout size={18} />

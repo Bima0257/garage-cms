@@ -2,7 +2,6 @@
 
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signIn } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 import { useState, Suspense } from 'react'
 import { IconLock, IconUser } from '@tabler/icons-react'
@@ -25,17 +24,22 @@ function LoginForm() {
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true)
     try {
-      const result = await signIn('credentials', {
-        username: data.username,
-        password: data.password,
-        redirect: false,
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: data.username,
+          password: data.password,
+        }),
       })
 
-      if (result?.error) {
+      const result = await res.json()
+
+      if (!res.ok) {
         Swal.fire({
           icon: 'error',
           title: 'Login Gagal',
-          text: 'Username atau password salah',
+          text: result.error || 'Username atau password salah',
           confirmButtonColor: '#f2a93b',
         })
       } else {

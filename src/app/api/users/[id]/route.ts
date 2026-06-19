@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { auth } from '@/lib/auth'
+import { getSession } from '@/lib/session'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { userUpdateSchema } from '@/lib/validations/user'
 import { comparePassword, hashPassword } from '@/lib/validations/user'
@@ -9,9 +9,9 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await auth()
+    const session = await getSession()
 
-    if (!session?.user) {
+    if (!session.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -19,7 +19,7 @@ export async function PUT(
     const userId = parseInt(id)
 
     // Only allow users to update their own profile
-    if (session.user.id !== userId) {
+    if (session.id !== userId) {
       return NextResponse.json(
         { error: 'You can only update your own profile' },
         { status: 403 }
@@ -109,9 +109,9 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await auth()
+    const session = await getSession()
 
-    if (!session?.user) {
+    if (!session.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -119,7 +119,7 @@ export async function GET(
     const userId = parseInt(id)
 
     // Only allow users to view their own profile
-    if (session.user.id !== userId) {
+    if (session.id !== userId) {
       return NextResponse.json(
         { error: 'You can only view your own profile' },
         { status: 403 }

@@ -1,38 +1,22 @@
-import { auth } from '@/lib/auth';
+import { getSession } from '@/lib/session';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { redirect } from 'next/navigation';
 import { ProfileClient } from '@/components/admin';
 
 export default async function ProfilePage() {
-  const session = await auth();
+  const session = await getSession();
 
-  if (!session?.user) {
+  if (!session.id) {
     redirect('/admin/login');
   }
 
-  console.log('Session:', session);
-  console.log('Session User ID:', session?.user?.id);
-
   const adminClient = createAdminClient();
 
-  // Test: select all columns like auth.ts does
-  const { data: user, error: userError } = await adminClient
+  const { data: user } = await adminClient
     .from('users')
     .select('*')
-    .eq('id', session.user.id)
+    .eq('id', session.id)
     .single();
-
-  console.log('User from DB:', user);
-  console.log('DB Error:', userError);
-
-  // Also test: query by username instead
-  const { data: userByUsername } = await adminClient
-    .from('users')
-    .select('*')
-    .eq('username', session.user.username)
-    .single();
-
-  console.log('User by username:', userByUsername);
 
   if (!user) {
     redirect('/admin/login');
@@ -51,7 +35,7 @@ export default async function ProfilePage() {
       </div>
 
       {/* Profile Form */}
-      <ProfileClient userId={session.user.id} initialUser={user} />
+      <ProfileClient userId={session.id} initialUser={user} />
     </div>
   );
 }
