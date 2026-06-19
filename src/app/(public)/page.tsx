@@ -64,7 +64,7 @@ export default async function HomePage() {
             />
           ) : (
             <Image
-              src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=1920"
+              src="/default-img/default.jpg"
               alt="Hero"
               fill
               className="object-cover grayscale-[0.4] contrast-[1.1]"
