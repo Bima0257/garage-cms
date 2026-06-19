@@ -34,8 +34,8 @@ export default async function AboutPage() {
             <div className="absolute -inset-2 md:-inset-4 border border-primary/20 -z-10 group-hover:inset-0 transition-all duration-500" />
             {safeImageSrc(about?.image) ? (
               <Image
-                src={safeImageSrc(about.image)!}
-                alt={about.name}
+                src={safeImageSrc(about?.image)!}
+                alt={about?.name ?? ''}
                 width={600}
                 height={500}
                 className="w-full grayscale brightness-75 contrast-125 object-cover aspect-[4/3]"
