@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { IconBrandInstagram, IconBrandYoutube, IconBrandFacebook, IconBrandTwitter } from '@tabler/icons-react'
+import { IconBrandInstagram, IconBrandYoutube, IconBrandFacebook, IconBrandTwitter, IconBrandTiktok } from '@tabler/icons-react'
 import type { SocialMedia, Settings } from '@/types/database.types'
 
 interface FooterProps {
@@ -12,6 +12,7 @@ const iconMap: Record<string, React.ReactNode> = {
   youtube: <IconBrandYoutube size={20} />,
   facebook: <IconBrandFacebook size={20} />,
   twitter: <IconBrandTwitter size={20} />,
+  tiktok: <IconBrandTiktok size={20} />,
 }
 
 export function Footer({ settings, socialMedia }: FooterProps) {
