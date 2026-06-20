@@ -13,7 +13,7 @@ interface ServiceCategoryFilterProps {
 export function ServiceCategoryFilter({ categories, selectedCategory }: ServiceCategoryFilterProps) {
   const [isOpen, setIsOpen] = useState(false)
 
-  const selectedCatData = categories.find(c => c.name === selectedCategory)
+  const selectedCatData = categories.find(c => c.id.toString() === selectedCategory)
 
   return (
     <>
@@ -53,10 +53,10 @@ export function ServiceCategoryFilter({ categories, selectedCategory }: ServiceC
             {categories.map((category) => (
               <Link
                 key={category.id}
-                href={`/layanan?category=${encodeURIComponent(category.name)}`}
+                href={`/layanan?category=${category.id}`}
                 onClick={() => setIsOpen(false)}
                 className={`block px-4 py-3 font-[var(--font-body-md)] border-b border-white/5 last:border-b-0 transition-colors ${
-                  selectedCategory === category.name
+                  selectedCategory === category.id.toString()
                     ? 'text-primary font-semibold bg-primary/5'
                     : 'text-text-secondary hover:text-primary hover:bg-white/5'
                 }`}
@@ -86,8 +86,8 @@ export function ServiceCategoryFilter({ categories, selectedCategory }: ServiceC
           {categories.map((category) => (
             <li key={category.id}>
               <Link
-                href={`/layanan?category=${encodeURIComponent(category.name)}`}
-                className={`group flex items-center justify-between w-full text-left font-[var(--font-body-md)] ${selectedCategory === category.name ? 'text-primary font-semibold' : 'text-text-secondary hover:text-primary'} transition-colors`}
+                href={`/layanan?category=${category.id}`}
+                className={`group flex items-center justify-between w-full text-left font-[var(--font-body-md)] ${selectedCategory === category.id.toString() ? 'text-primary font-semibold' : 'text-text-secondary hover:text-primary'} transition-colors`}
               >
                 <span>{category.name}</span>
                 <span className={`w-4 h-[1px] ${selectedCategory === category.name ? 'bg-primary' : ''} group-hover:w-8 transition-all`}></span>

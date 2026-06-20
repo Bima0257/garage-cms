@@ -27,15 +27,7 @@ export default async function ServicesPage({ searchParams }: PageProps) {
     .order('created_at', { ascending: false })
 
   if (selectedCategory) {
-    const { data: categoryData } = await supabase
-      .from('service_categories')
-      .select('id')
-      .eq('name', selectedCategory)
-      .single() as { data: { id: number } | null }
-
-    if (categoryData) {
-      query = query.eq('category_id', categoryData.id)
-    }
+    query = query.eq('category_id', parseInt(selectedCategory))
   }
 
   const { data: services } = await query as { data: Service[] | null }

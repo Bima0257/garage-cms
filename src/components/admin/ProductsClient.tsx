@@ -143,7 +143,6 @@ export function ProductsClient({ initialProducts, categories }: ProductsClientPr
       if (!response.ok) throw new Error('Gagal menyimpan')
 
       router.refresh()
-      setProducts(await response.json())
       setEditingProduct(null)
     } finally {
       setIsSubmitting(false)
