@@ -40,7 +40,7 @@ export default async function PublicLayout({
     .lte('start_date', now)
     .gte('end_date', now)
     .limit(1)
-    .single() as { data: ModalPromotion | null }
+    .maybeSingle() as { data: ModalPromotion | null }
 
   const whatsapp = about?.whatsapp || undefined
 

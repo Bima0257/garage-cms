@@ -13,7 +13,7 @@ import { ImageUploader } from './ImageUploader'
 interface FormField {
   name: string
   label: string
-  type: 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select' | 'checkbox' | 'image' | 'url'
+  type: 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select' | 'checkbox' | 'image' | 'url' | 'date'
   placeholder?: string
   options?: { value: string | number; label: string }[]
   required?: boolean
@@ -170,7 +170,7 @@ export function FormDialog({
                 />
               )}
 
-              {!field.type || ['text', 'email', 'password', 'number', 'url'].includes(field.type) ? (
+              {!field.type || ['text', 'email', 'password', 'number', 'url', 'date'].includes(field.type) ? (
                 <input
                   type={field.type}
                   {...register(field.name, { valueAsNumber: field.type === 'number' })}

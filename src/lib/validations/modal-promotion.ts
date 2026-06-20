@@ -6,7 +6,10 @@ export const modalPromotionSchema = z.object({
   description: z.string().optional().nullable(),
   image: z.string().optional().nullable(),
   button_text: z.string().max(100).optional().nullable(),
-  button_url: z.string().url().optional().nullable(),
+  button_url: z.string().optional().nullable().refine(
+    (val) => !val || val.startsWith('http://') || val.startsWith('https://') || val.startsWith('/'),
+    { message: 'URL harus dimulai dengan http://, https://, atau /' }
+  ),
   start_date: z.string().min(1, 'Start date is required'),
   end_date: z.string().min(1, 'End date is required'),
   is_active: z.boolean().default(true),

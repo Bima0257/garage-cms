@@ -1,7 +1,9 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import Image from 'next/image'
 import { IconX } from '@tabler/icons-react'
+import { safeImageSrc } from '@/lib/utils'
 import type { ModalPromotion } from '@/types/database.types'
 
 interface PromoModalProps {
@@ -54,11 +56,12 @@ export function PromoModal({ promotion }: PromoModalProps) {
 
         {/* Image */}
         {promotion.image && (
-          <div className="aspect-video overflow-hidden">
-            <img
-              src={promotion.image}
+          <div className="relative aspect-video overflow-hidden">
+            <Image
+              src={safeImageSrc(promotion.image)}
               alt={promotion.title}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
           </div>
         )}

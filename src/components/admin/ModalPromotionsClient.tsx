@@ -104,8 +104,8 @@ export function ModalPromotionsClient({ initialPromotions }: ModalPromotionsClie
     { name: 'image', label: 'Gambar', type: 'image' as const },
     { name: 'button_text', label: 'Teks Tombol', type: 'text' as const },
     { name: 'button_url', label: 'URL Tombol', type: 'url' as const },
-    { name: 'start_date', label: 'Mulai', type: 'text' as const, required: true },
-    { name: 'end_date', label: 'Selesai', type: 'text' as const, required: true },
+    { name: 'start_date', label: 'Mulai', type: 'date' as const, required: true },
+    { name: 'end_date', label: 'Selesai', type: 'date' as const, required: true },
     { name: 'is_active', label: 'Aktif', type: 'checkbox' as const },
   ]
 
