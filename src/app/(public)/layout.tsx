@@ -78,10 +78,12 @@ export default async function PublicLayout({
           href={'https://wa.me/' + whatsapp.replace(/\D/g, '')}
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-24 md:bottom-8 right-8 z-[100] bg-whatsapp-green text-white w-14 h-14 flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all group"
+          className="fixed bottom-20 md:bottom-8 right-4 md:right-8 z-[100] bg-whatsapp-green text-white w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-full shadow-xl hover:shadow-whatsapp-green/25 hover:scale-110 active:scale-95 transition-all duration-300 group"
+          aria-label="Chat via WhatsApp"
         >
-          <IconBrandWhatsapp size={28} />
-          <span className="absolute right-full mr-4 bg-white text-black px-4 py-2 font-[var(--font-label-technical)] uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">
+          <IconBrandWhatsapp size={26} className="md:hidden" />
+          <IconBrandWhatsapp size={30} className="hidden md:block" />
+          <span className="absolute right-full mr-4 bg-background border border-white/10 text-text-primary px-4 py-2 font-[var(--font-label-technical)] text-xs uppercase whitespace-nowrap rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 shadow-lg hidden md:block">
             Konsultasi dengan Ahli
           </span>
         </a>
