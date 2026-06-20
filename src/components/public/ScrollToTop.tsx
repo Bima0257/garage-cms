@@ -34,9 +34,9 @@ export function ScrollToTop() {
         fixed right-4 md:right-8 z-[90] w-10 h-10 md:w-12 md:h-12 bg-surface border border-white/10 flex items-center justify-center
         hover:bg-primary hover:border-primary transition-all duration-300
         active:scale-95
+        bottom-[9rem] md:bottom-[7rem]
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}
       `}
-      style={{ bottom: '5rem' }}
       aria-label="Scroll to top"
     >
       <IconArrowUp size={18} className="text-on-surface-variant" />
