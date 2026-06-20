@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { IconHome, IconPackages, IconTool, IconInfoCircle, IconPhone } from '@tabler/icons-react'
+import { usePathname, useRouter } from 'next/navigation'
+import { useState, useRef, useEffect } from 'react'
+import { IconHome, IconPackages, IconTool, IconInfoCircle, IconPhone, IconSearch } from '@tabler/icons-react'
 
 interface NavbarProps {
   siteName?: string
@@ -17,6 +18,64 @@ const navLinks = [
   { href: '/kontak', label: 'Kontak', icon: IconPhone },
 ]
 
+function SearchBar({ onNavigate }: { onNavigate?: () => void }) {
+  const [query, setQuery] = useState('')
+  const [open, setOpen] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (open && inputRef.current) {
+      inputRef.current.focus()
+      setQuery('')
+    }
+  }, [open])
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const trimmed = query.trim()
+    if (trimmed) {
+      router.push(`/cari?q=${encodeURIComponent(trimmed)}`)
+      setOpen(false)
+      onNavigate?.()
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex items-center">
+      {open ? (
+        <div className="flex items-center gap-2">
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Cari produk atau layanan..."
+            className="w-48 lg:w-64 h-9 px-3 bg-background border border-outline-variant text-text-primary text-sm focus:outline-none focus:border-primary transition-colors font-[var(--font-label-technical)]"
+            onBlur={() => { if (!query) setOpen(false) }}
+          />
+          <button
+            type="submit"
+            className="p-1.5 text-text-muted hover:text-primary transition-colors"
+            aria-label="Cari"
+          >
+            <IconSearch size={18} />
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="p-2 text-text-muted hover:text-primary transition-colors"
+          aria-label="Buka pencarian"
+        >
+          <IconSearch size={20} />
+        </button>
+      )}
+    </form>
+  )
+}
+
 export function Navbar({ siteName = 'STEED', whatsapp }: NavbarProps) {
   const pathname = usePathname()
 
@@ -28,15 +87,16 @@ export function Navbar({ siteName = 'STEED', whatsapp }: NavbarProps) {
 
   return (
     <>
-      {/* Mobile Top Header - Logo Only */}
+      {/* Mobile Top Header - Logo + Search */}
       <header className="md:hidden fixed top-0 w-full z-[60] bg-background/90 backdrop-blur-xl border-b border-white/10">
-        <div className="flex justify-center items-center px-4 py-3">
+        <div className="flex items-center justify-between px-4 py-3">
           <Link
             href="/"
             className="font-[var(--font-display-lg)] text-[var(--font-size-headline-sm)] text-primary font-bold tracking-tighter"
           >
             {siteName}
           </Link>
+          <SearchBar onNavigate={() => {}} />
         </div>
       </header>
 
@@ -68,13 +128,16 @@ export function Navbar({ siteName = 'STEED', whatsapp }: NavbarProps) {
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <button
-            onClick={openWhatsApp}
-            className="bg-primary text-on-primary px-6 py-2 font-bold uppercase text-sm tracking-widest active:scale-95 transition-transform"
-          >
-            {whatsapp ? 'KONSULTASI VIA WA' : 'HUBUNGI KAMI'}
-          </button>
+          {/* Right side: Search + CTA */}
+          <div className="flex items-center gap-4">
+            <SearchBar />
+            <button
+              onClick={openWhatsApp}
+              className="bg-primary text-on-primary px-6 py-2 font-bold uppercase text-sm tracking-widest active:scale-95 transition-transform"
+            >
+              {whatsapp ? 'KONSULTASI VIA WA' : 'HUBUNGI KAMI'}
+            </button>
+          </div>
         </div>
       </header>
 
