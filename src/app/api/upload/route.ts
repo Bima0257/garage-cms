@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { requireAuth } from '@/lib/session'
 
 export async function POST(request: Request) {
   try {
+    if (!(await requireAuth())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const formData = await request.formData()
     const file = formData.get('file') as File
     const folder = formData.get('folder') as string || 'general'

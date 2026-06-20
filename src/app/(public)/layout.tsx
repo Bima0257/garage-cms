@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { Navbar, Footer, PromoModal, ScrollToTop } from '@/components/public'
+import { IconBrandWhatsapp } from '@tabler/icons-react'
 import type { Settings, About, SocialMedia, ModalPromotion } from '@/types/database.types'
 
 export default async function PublicLayout({
@@ -79,9 +80,7 @@ export default async function PublicLayout({
           rel="noopener noreferrer"
           className="fixed bottom-24 md:bottom-8 right-8 z-[100] bg-whatsapp-green text-white w-14 h-14 flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all group"
         >
-          <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
-            chat
-          </span>
+          <IconBrandWhatsapp size={28} />
           <span className="absolute right-full mr-4 bg-white text-black px-4 py-2 font-[var(--font-label-technical)] uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">
             Konsultasi dengan Ahli
           </span>

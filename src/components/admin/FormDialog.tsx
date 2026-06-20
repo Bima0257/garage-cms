@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { ZodSchema } from 'zod'
 import Swal from 'sweetalert2'
+import { SWAL_CONFIRM_COLOR } from '@/lib/utils'
 import { ImageUploader } from './ImageUploader'
 
 interface FormField {
@@ -83,14 +84,14 @@ export function FormDialog({
         icon: 'success',
         title: 'Berhasil',
         text: 'Data berhasil disimpan',
-        confirmButtonColor: '#f2a93b',
+        confirmButtonColor: SWAL_CONFIRM_COLOR,
       })
     } catch {
       Swal.fire({
         icon: 'error',
         title: 'Gagal',
         text: 'Gagal menyimpan data',
-        confirmButtonColor: '#f2a93b',
+        confirmButtonColor: SWAL_CONFIRM_COLOR,
       })
     }
   }

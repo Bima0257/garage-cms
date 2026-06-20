@@ -7,6 +7,7 @@ import { IconDeviceFloppy, IconSettings } from '@tabler/icons-react'
 import { settingsSchema, type SettingsFormData } from '@/lib/validations/settings'
 import type { About } from '@/types/database.types'
 import Swal from 'sweetalert2'
+import { SWAL_CONFIRM_COLOR } from '@/lib/utils'
 import { ImageUploader } from '@/components/admin'
 
 interface SettingsClientProps {
@@ -54,14 +55,14 @@ export function SettingsClient({ about }: SettingsClientProps) {
         icon: 'success',
         title: 'Pengaturan Disimpan',
         text: 'Pengaturan berhasil diperbarui.',
-        confirmButtonColor: '#f2a93b',
+        confirmButtonColor: SWAL_CONFIRM_COLOR,
       })
     } catch {
       Swal.fire({
         icon: 'error',
         title: 'Gagal',
         text: 'Gagal menyimpan pengaturan.',
-        confirmButtonColor: '#f2a93b',
+        confirmButtonColor: SWAL_CONFIRM_COLOR,
       })
     } finally {
       setIsSubmitting(false)

@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { serviceCategorySchema } from '@/lib/validations/service-category'
+import { requireAuth } from '@/lib/session'
 import { revalidatePath } from 'next/cache'
 
 export async function GET() {
   try {
+    if (!(await requireAuth())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const adminClient = createAdminClient()
     const { data, error } = await adminClient
       .from('service_categories')
@@ -22,6 +24,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    if (!(await requireAuth())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const body = await request.json()
     const validated = serviceCategorySchema.parse(body)
 

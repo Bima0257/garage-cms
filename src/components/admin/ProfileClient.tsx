@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { userUpdateSchema, type UserUpdateFormData } from '@/lib/validations/user'
 import { useRouter } from 'next/navigation'
-import { safeImageSrc } from '@/lib/utils'
+import { safeImageSrc, SWAL_CONFIRM_COLOR } from '@/lib/utils'
 import { IconUser, IconLock, IconEye, IconEyeOff } from '@tabler/icons-react'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
@@ -77,7 +77,7 @@ export function ProfileClient({ userId, initialUser }: ProfileClientProps) {
           icon: 'error',
           title: 'Gagal',
           text: 'Password tidak cocok',
-          confirmButtonColor: '#f2a93b',
+          confirmButtonColor: SWAL_CONFIRM_COLOR,
         })
         return
       }
@@ -104,7 +104,7 @@ export function ProfileClient({ userId, initialUser }: ProfileClientProps) {
         icon: 'success',
         title: 'Berhasil',
         text: 'Profil berhasil diperbarui',
-        confirmButtonColor: '#f2a93b',
+        confirmButtonColor: SWAL_CONFIRM_COLOR,
       })
 
       router.refresh()
@@ -122,7 +122,7 @@ export function ProfileClient({ userId, initialUser }: ProfileClientProps) {
         icon: 'error',
         title: 'Gagal',
         text: error instanceof Error ? error.message : 'Gagal memperbarui profil',
-        confirmButtonColor: '#f2a93b',
+        confirmButtonColor: SWAL_CONFIRM_COLOR,
       })
     } finally {
       setLoading(false)

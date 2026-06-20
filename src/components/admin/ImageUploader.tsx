@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { SWAL_CONFIRM_COLOR } from '@/lib/utils'
 import { IconUpload, IconX } from '@tabler/icons-react'
 import Swal from 'sweetalert2'
 
@@ -39,7 +40,7 @@ export function ImageUploader({ value, onChange, folder = 'general' }: ImageUplo
         icon: 'error',
         title: 'Upload Gagal',
         text: 'Gagal mengupload gambar. Silakan coba lagi.',
-        confirmButtonColor: '#f2a93b',
+        confirmButtonColor: SWAL_CONFIRM_COLOR,
       })
     } finally {
       setIsUploading(false)

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { productCategorySchema } from '@/lib/validations/product-category'
+import { requireAuth } from '@/lib/session'
 import { revalidatePath } from 'next/cache'
 
 // Helper function to generate slug from name
@@ -18,6 +19,7 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    if (!(await requireAuth())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const { id } = await params
     const body = await request.json()
     const validated = productCategorySchema.partial().parse(body)
@@ -62,6 +64,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    if (!(await requireAuth())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const { id } = await params
     const adminClient = createAdminClient()
 

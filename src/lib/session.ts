@@ -27,3 +27,15 @@ export async function getSession(): Promise<Session> {
   const cookieStore = await cookies()
   return getIronSession<SessionData>(cookieStore, sessionOptions)
 }
+
+export async function requireAuth(): Promise<SessionData | null> {
+  const session = await getSession()
+  if (!session.id) return null
+  return {
+    id: session.id,
+    name: session.name,
+    username: session.username,
+    email: session.email,
+    photo: session.photo,
+  }
+}

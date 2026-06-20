@@ -1,5 +1,6 @@
 'use client'
 
+import { SWAL_CONFIRM_COLOR } from '@/lib/utils'
 import { IconEdit, IconTrash, IconToggleLeft, IconToggleRight } from '@tabler/icons-react'
 import Swal from 'sweetalert2'
 
@@ -24,7 +25,7 @@ export function ActionButtons({
       text: 'Yakin ingin menghapus item ini? Tindakan ini tidak dapat dibatalkan.',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#f2a93b',
+      confirmButtonColor: SWAL_CONFIRM_COLOR,
       cancelButtonColor: '#514535',
         confirmButtonText: 'Hapus',
         cancelButtonText: 'Batal',

@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { siteSettingsSchema } from '@/lib/validations/site-settings'
+import { requireAuth } from '@/lib/session'
 import { revalidatePath } from 'next/cache'
 
 export async function GET() {
   try {
+    if (!(await requireAuth())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const adminClient = createAdminClient()
     const { data, error } = await adminClient
       .from('settings')

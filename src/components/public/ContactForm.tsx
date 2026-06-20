@@ -1,5 +1,6 @@
 'use client'
 
+import { SWAL_CONFIRM_COLOR } from '@/lib/utils'
 import { IconBrandWhatsapp } from '@tabler/icons-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -34,7 +35,7 @@ export function ContactForm({ whatsapp }: ContactFormProps) {
         icon: 'success',
         title: 'Pesan Terkirim!',
         text: 'Terima kasih, pesan Anda telah diterima.',
-        confirmButtonColor: '#f2a93b',
+        confirmButtonColor: SWAL_CONFIRM_COLOR,
       })
 
       reset()
@@ -43,7 +44,7 @@ export function ContactForm({ whatsapp }: ContactFormProps) {
         icon: 'error',
         title: 'Gagal',
         text: 'Gagal mengirim pesan. Silakan coba lagi.',
-        confirmButtonColor: '#f2a93b',
+        confirmButtonColor: SWAL_CONFIRM_COLOR,
       })
     }
   }

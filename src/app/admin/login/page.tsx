@@ -4,8 +4,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSearchParams } from 'next/navigation'
 import { useState, Suspense } from 'react'
-import { IconLock, IconUser } from '@tabler/icons-react'
+import { IconLock, IconUser, IconArrowRight } from '@tabler/icons-react'
 import Swal from 'sweetalert2'
+import { SWAL_CONFIRM_COLOR } from '@/lib/utils'
 import { loginSchema, type LoginFormData } from '@/lib/validations'
 
 function LoginForm() {
@@ -40,7 +41,7 @@ function LoginForm() {
           icon: 'error',
           title: 'Login Gagal',
           text: result.error || 'Username atau password salah',
-          confirmButtonColor: '#f2a93b',
+          confirmButtonColor: SWAL_CONFIRM_COLOR,
         })
       } else {
         window.location.assign(callbackUrl)
@@ -50,7 +51,7 @@ function LoginForm() {
         icon: 'error',
         title: 'Error',
         text: 'Terjadi kesalahan yang tidak terduga',
-        confirmButtonColor: '#f2a93b',
+        confirmButtonColor: SWAL_CONFIRM_COLOR,
       })
     } finally {
       setIsLoading(false)
@@ -132,7 +133,7 @@ function LoginForm() {
             className="w-full bg-primary text-on-primary py-5 font-[var(--font-headline-md)] text-[var(--font-size-headline-md)] font-bold uppercase tracking-widest hover:shadow-[0_0_30px_rgba(242,169,59,0.25)] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {isLoading ? 'Memproses...' : 'Masuk'}
-            {!isLoading && <span className="material-symbols-outlined">arrow_forward</span>}
+            {!isLoading && <IconArrowRight size={18} />}
           </button>
         </form>
 
