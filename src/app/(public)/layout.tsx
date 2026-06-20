@@ -78,7 +78,7 @@ export default async function PublicLayout({
           href={'https://wa.me/' + whatsapp.replace(/\D/g, '')}
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-20 md:bottom-8 right-4 md:right-8 z-[100] bg-whatsapp-green text-white w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-full shadow-xl hover:shadow-whatsapp-green/25 hover:scale-110 active:scale-95 transition-all duration-300 group"
+          className="fixed bottom-48 md:bottom-36 right-4 md:right-8 z-[100] bg-whatsapp-green text-white w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-full shadow-xl hover:shadow-whatsapp-green/25 hover:scale-110 active:scale-95 transition-all duration-300 group"
           aria-label="Chat via WhatsApp"
         >
           <IconBrandWhatsapp size={26} className="md:hidden" />

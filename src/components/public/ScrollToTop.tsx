@@ -34,7 +34,7 @@ export function ScrollToTop() {
         fixed right-4 md:right-8 z-[110] w-10 h-10 md:w-12 md:h-12 bg-surface border border-white/10 flex items-center justify-center
         hover:bg-primary hover:border-primary transition-all duration-300
         active:scale-95
-        bottom-48 md:bottom-36
+        bottom-20 md:bottom-8
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}
       `}
       aria-label="Scroll to top"
