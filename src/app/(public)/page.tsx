@@ -195,12 +195,12 @@ export default async function HomePage() {
             <div className="relative group">
               <div className="absolute -inset-2 md:-inset-4 border border-primary/20 -z-10 group-hover:inset-0 transition-all duration-500" />
               <Image
-                  src={safeImageSrc(about.image)}
-                  alt={about.name}
-                  width={600}
-                  height={500}
-                  className="w-full grayscale brightness-75 contrast-125 object-cover aspect-[4/3]"
-                />
+                src={safeImageSrc(about.image)}
+                alt={about.name}
+                width={600}
+                height={500}
+                className="w-full grayscale brightness-75 contrast-125 object-cover aspect-[4/3]"
+              />
               <div className="absolute bottom-3 md:bottom-4 left-3 md:left-4 bg-primary text-on-primary px-3 md:px-4 py-2 font-[var(--font-label-technical)] text-[10px] md:text-[var(--font-size-label-technical)] uppercase tracking-widest">
                 EST. 2018 / BORN IN THE GARAGE
               </div>

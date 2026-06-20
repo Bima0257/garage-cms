@@ -66,13 +66,13 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-[var(--spacing-gutter)]">
           {/* Image */}
           <div className="relative aspect-video bg-surface-card border border-white/10 overflow-hidden">
-              <Image
-                src={safeImageSrc(service.image)}
-                alt={service.name}
-                fill
-                className="object-cover"
-                priority
-              />
+            <Image
+              src={safeImageSrc(service.image)}
+              alt={service.name}
+              fill
+              className="object-cover"
+              priority
+            />
             {service.is_featured && (
               <span className="absolute top-4 left-4 px-4 py-2 bg-primary text-on-primary font-[var(--font-label-technical)] uppercase">
                 UNGGULAN

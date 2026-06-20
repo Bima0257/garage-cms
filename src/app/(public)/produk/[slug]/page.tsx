@@ -73,13 +73,13 @@ export default async function ProductDetailPage({ params }: PageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-[var(--spacing-gutter)]">
           {/* Image */}
           <div className="relative aspect-square bg-surface-card border border-white/10 overflow-hidden">
-              <Image
-                src={safeImageSrc(product.image)}
-                alt={product.name}
-                fill
-                className="object-cover"
-                priority
-              />
+            <Image
+              src={safeImageSrc(product.image)}
+              alt={product.name}
+              fill
+              className="object-cover"
+              priority
+            />
             {product.discount_price && product.discount_price < product.price && (
               <span className="absolute top-4 left-4 px-4 py-2 bg-primary text-on-primary font-[var(--font-label-technical)] uppercase">
                 DISKON
