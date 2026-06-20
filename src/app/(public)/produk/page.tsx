@@ -1,16 +1,19 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
-import { ProductCard, CategoryFilter } from '@/components/public'
+import { ProductCard, CategoryFilter, Pagination } from '@/components/public'
 import type { ProductCategory, Product } from '@/types/database.types'
 
+const ITEMS_PER_PAGE = 12
+
 interface PageProps {
-  searchParams: Promise<{ category?: string }>
+  searchParams: Promise<{ category?: string; page?: string }>
 }
 
 export default async function ProductsPage({ searchParams }: PageProps) {
   const params = await searchParams
   const supabase = await createClient()
   const selectedCategory = params.category
+  const currentPage = Math.max(1, parseInt(params.page || '1'))
 
   // Fetch categories
   const { data: categories } = await supabase
@@ -19,26 +22,40 @@ export default async function ProductsPage({ searchParams }: PageProps) {
     .eq('is_active', true)
     .order('sort_order', { ascending: true }) as { data: ProductCategory[] | null }
 
-  // Fetch products
-  let query = supabase
+  // Resolve category slug to id
+  let categoryId: number | null = null
+  if (selectedCategory) {
+    const { data: cat } = await supabase
+      .from('product_categories')
+      .select('id')
+      .eq('slug', selectedCategory)
+      .single() as { data: { id: number } | null }
+    categoryId = cat?.id ?? null
+  }
+
+  // Count total items (for pagination)
+  let countQuery = supabase
+    .from('products')
+    .select('*', { count: 'exact', head: true })
+    .eq('is_active', true)
+
+  let dataQuery = supabase
     .from('products')
     .select('*, product_categories(name)')
     .eq('is_active', true)
     .order('created_at', { ascending: false })
 
-  if (selectedCategory) {
-    const { data: categoryData } = await supabase
-      .from('product_categories')
-      .select('id')
-      .eq('slug', selectedCategory)
-      .single() as { data: { id: number } | null }
-
-    if (categoryData) {
-      query = query.eq('category_id', categoryData.id)
-    }
+  if (categoryId) {
+    countQuery = countQuery.eq('category_id', categoryId)
+    dataQuery = dataQuery.eq('category_id', categoryId)
   }
 
-  const { data: products } = await query as { data: Product[] | null }
+  const [{ count: totalItems }, { data: products }] = await Promise.all([
+    countQuery,
+    dataQuery.range((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE - 1),
+  ]) as [{ count: number | null }, { data: Product[] | null }]
+
+  const totalPages = Math.ceil((totalItems || 0) / ITEMS_PER_PAGE)
 
   // Fetch settings for whatsapp
   const { data: settings } = await supabase
@@ -108,6 +125,14 @@ export default async function ProductsPage({ searchParams }: PageProps) {
                 </Link>
               </div>
             )}
+
+            {/* Pagination */}
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              basePath="/produk"
+              searchParams={selectedCategory ? { category: selectedCategory } : undefined}
+            />
           </div>
         </div>
       </div>

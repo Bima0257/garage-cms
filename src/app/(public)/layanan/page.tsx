@@ -1,16 +1,19 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
-import { ServiceCard, ServiceCategoryFilter } from '@/components/public'
+import { ServiceCard, ServiceCategoryFilter, Pagination } from '@/components/public'
 import type { ServiceCategory, Service } from '@/types/database.types'
 
+const ITEMS_PER_PAGE = 12
+
 interface PageProps {
-  searchParams: Promise<{ category?: string }>
+  searchParams: Promise<{ category?: string; page?: string }>
 }
 
 export default async function ServicesPage({ searchParams }: PageProps) {
   const params = await searchParams
   const supabase = await createClient()
   const selectedCategory = params.category
+  const currentPage = Math.max(1, parseInt(params.page || '1'))
 
   // Fetch service categories
   const { data: categories } = await supabase
@@ -19,18 +22,30 @@ export default async function ServicesPage({ searchParams }: PageProps) {
     .eq('is_active', true)
     .order('sort_order', { ascending: true }) as { data: ServiceCategory[] | null }
 
-  // Fetch services
-  let query = supabase
+  // Count total items
+  let countQuery = supabase
+    .from('services')
+    .select('*', { count: 'exact', head: true })
+    .eq('is_active', true)
+
+  let dataQuery = supabase
     .from('services')
     .select('*, service_categories(name)')
     .eq('is_active', true)
     .order('created_at', { ascending: false })
 
   if (selectedCategory) {
-    query = query.eq('category_id', parseInt(selectedCategory))
+    const categoryId = parseInt(selectedCategory)
+    countQuery = countQuery.eq('category_id', categoryId)
+    dataQuery = dataQuery.eq('category_id', categoryId)
   }
 
-  const { data: services } = await query as { data: Service[] | null }
+  const [{ count: totalItems }, { data: services }] = await Promise.all([
+    countQuery,
+    dataQuery.range((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE - 1),
+  ]) as [{ count: number | null }, { data: Service[] | null }]
+
+  const totalPages = Math.ceil((totalItems || 0) / ITEMS_PER_PAGE)
 
   // Fetch settings for whatsapp
   const { data: settings } = await supabase
@@ -101,6 +116,14 @@ export default async function ServicesPage({ searchParams }: PageProps) {
                 </Link>
               </div>
             )}
+
+            {/* Pagination */}
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              basePath="/layanan"
+              searchParams={selectedCategory ? { category: selectedCategory } : undefined}
+            />
           </div>
         </div>
       </div>
