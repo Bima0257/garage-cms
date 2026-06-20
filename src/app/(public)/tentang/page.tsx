@@ -51,7 +51,7 @@ export default async function AboutPage() {
               <span className="text-primary">FOR SOULS.</span>
             </h1>
             <p className="font-[var(--font-body-lg)] text-[var(--font-size-body-lg)] text-on-surface-variant mb-4 md:mb-6 max-w-2xl">
-              {about?.description || 'STEED isn\'t just a workshop; it\'s a sanctuary for high-performance machinery and the culture that drives it. Founded by a collective of industrial designers and master mechanics, we specialize in the restoration and transformation of classic motorcycles into contemporary masterpieces.'}
+              {about?.description || '07 Garage isn\'t just a workshop; it\'s a sanctuary for high-performance machinery and the culture that drives it. Founded by a collective of industrial designers and master mechanics, we specialize in the restoration and transformation of classic motorcycles into contemporary masterpieces.'}
             </p>
             <p className="font-[var(--font-body-md)] text-[var(--font-size-body-md)] text-text-muted mb-6 md:mb-10 max-w-2xl">
               Every bolt turned and every weld fused in our facility is a testament to our obsession with mechanical integrity. We bridge the gap between vintage soul and modern reliability using surgical precision and high-grade materials.

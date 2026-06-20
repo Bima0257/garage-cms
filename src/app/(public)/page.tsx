@@ -77,7 +77,7 @@ export default async function HomePage() {
         {/* Ghost Text Background */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10 hidden md:block">
           <span className="font-[var(--font-display-ghost)] text-[200px] md:text-[300px] leading-none uppercase select-none outline-text">
-            STEED
+            07 GARAGE
           </span>
         </div>
 
@@ -187,7 +187,7 @@ export default async function HomePage() {
           {/* Ghost Text */}
           <div className="absolute top-0 right-12 h-full flex items-center pointer-events-none opacity-5 hidden lg:block">
             <span className="font-[var(--font-display-ghost)] text-[180px] lg:text-[240px] leading-none uppercase select-none rotate-90 origin-center whitespace-nowrap outline-text">
-              STEED
+              07 GARAGE
             </span>
           </div>
 
@@ -211,7 +211,7 @@ export default async function HomePage() {
                 <span className="text-primary">FOR SOULS.</span>
               </h2>
               <p className="font-[var(--font-body-md)] md:text-[var(--font-size-body-lg)] text-on-surface-variant mb-4 md:mb-6 max-w-2xl line-clamp-3 md:line-clamp-none">
-                {about.description || 'STEED isn\'t just a workshop; it\'s a sanctuary for high-performance machinery and the culture that drives it. Founded by a collective of industrial designers and master mechanics, we specialize in the restoration and transformation of classic motorcycles into contemporary masterpieces.'}
+                {about.description || '07 Garage isn\'t just a workshop; it\'s a sanctuary for high-performance machinery and the culture that drives it. Founded by a collective of industrial designers and master mechanics, we specialize in the restoration and transformation of classic motorcycles into contemporary masterpieces.'}
               </p>
               <Link
                 href="/tentang"
@@ -250,7 +250,7 @@ export default async function HomePage() {
       <section className="py-12 md:py-[var(--spacing-margin-desktop)] bg-surface-elevated relative overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5 hidden md:block">
           <span className="font-[var(--font-display-ghost)] text-[150px] lg:text-[200px] leading-none uppercase select-none outline-text">
-            STEED
+            07 GARAGE
           </span>
         </div>
         <div className="max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] text-center relative z-10">

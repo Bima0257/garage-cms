@@ -63,7 +63,7 @@ function LoginForm() {
       {/* Background Ghost Text */}
       <div className="fixed inset-0 flex items-center justify-center z-0 overflow-hidden pointer-events-none">
         <h1 className="font-[var(--font-display-ghost)] text-[var(--font-size-display-ghost)] ghost-text uppercase whitespace-nowrap opacity-50 transform -rotate-12 scale-150">
-          STEED AUTH STEED AUTH STEED AUTH
+          07 GARAGE 07 GARAGE 07 GARAGE
         </h1>
       </div>
 
@@ -76,7 +76,7 @@ function LoginForm() {
         <div className="flex flex-col items-center mb-10">
           <div className="mb-2">
             <span className="font-[var(--font-headline-md)] text-[var(--font-size-headline-md)] font-bold text-primary uppercase tracking-[0.2em]">
-              STEED
+              07 GARAGE
             </span>
           </div>
           <p className="font-[var(--font-label-technical)] text-[var(--font-size-label-technical)] text-text-muted uppercase tracking-widest">

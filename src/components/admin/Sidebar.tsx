@@ -127,7 +127,7 @@ export function AdminSidebar({ user }: SidebarProps) {
       <div className="px-6 py-8">
         <Link href="/admin/dashboard">
           <h1 className="font-[var(--font-headline-md)] text-[var(--font-size-headline-md)] font-bold text-primary uppercase tracking-wider">
-            STEED ADMIN
+            07 GARAGE ADMIN
           </h1>
           <p className="font-[var(--font-label-technical)] text-[var(--font-size-label-technical)] text-text-secondary mt-1 uppercase">
             CMS Bengkel

@@ -16,9 +16,9 @@ const iconMap: Record<string, React.ReactNode> = {
 }
 
 export function Footer({ settings, socialMedia }: FooterProps) {
-  const siteName = settings?.site_name || 'STEED'
+  const siteName = settings?.site_name || '07 Garage'
   const tagline = settings?.tagline || 'Engineered for Performance'
-  const footerText = settings?.footer_text || '© 2024 STEED MOTORWORKS. ENGINEERED FOR PERFORMANCE.'
+  const footerText = settings?.footer_text || '© 2024 07 Garage. ENGINEERED FOR PERFORMANCE.'
   const activeSocialMedia = socialMedia?.filter((s) => s.is_active) || []
 
   return (

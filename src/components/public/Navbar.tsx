@@ -76,7 +76,7 @@ function SearchBar({ onNavigate }: { onNavigate?: () => void }) {
   )
 }
 
-export function Navbar({ siteName = 'STEED', whatsapp }: NavbarProps) {
+export function Navbar({ siteName = '07 Garage', whatsapp }: NavbarProps) {
   const pathname = usePathname()
 
   const openWhatsApp = () => {

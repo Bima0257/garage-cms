@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "STEED Motorworks",
+  title: "07 Garage",
   description: "Precision workshop specializing in cafe racers and performance tuning. Engineered for those who ride with intent.",
   icons: {
     icon: "/favicon.ico",
