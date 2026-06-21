@@ -8,11 +8,13 @@ import { IconLock, IconUser, IconArrowRight } from '@tabler/icons-react'
 import Swal from 'sweetalert2'
 import { SWAL_CONFIRM_COLOR } from '@/lib/utils'
 import { loginSchema, type LoginFormData } from '@/lib/validations'
+import { RedirectOverlay } from '@/components/admin'
 
 function LoginForm() {
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/admin/dashboard'
   const [isLoading, setIsLoading] = useState(false)
+  const [isRedirecting, setIsRedirecting] = useState(false)
 
   const {
     register,
@@ -43,7 +45,9 @@ function LoginForm() {
           text: result.error || 'Username atau password salah',
           confirmButtonColor: SWAL_CONFIRM_COLOR,
         })
+        setIsLoading(false)
       } else {
+        setIsRedirecting(true)
         window.location.assign(callbackUrl)
       }
     } catch {
@@ -53,7 +57,6 @@ function LoginForm() {
         text: 'Terjadi kesalahan yang tidak terduga',
         confirmButtonColor: SWAL_CONFIRM_COLOR,
       })
-    } finally {
       setIsLoading(false)
     }
   }
@@ -89,7 +92,7 @@ function LoginForm() {
           {/* Username */}
           <div className="group relative">
             <label className="block font-[var(--font-label-technical)] text-[var(--font-size-label-technical)] text-text-secondary uppercase mb-2">
-              Admin Identifier
+              Username
             </label>
             <div className="relative flex items-center border-b border-outline-variant transition-colors focus-within:border-primary amber-glow">
               <IconUser size={20} className="absolute left-0 text-text-muted group-focus-within:text-primary transition-colors" />
@@ -109,7 +112,7 @@ function LoginForm() {
           <div className="group relative">
             <div className="flex justify-between items-end mb-2">
               <label className="block font-[var(--font-label-technical)] text-[var(--font-size-label-technical)] text-text-secondary uppercase">
-                Access Key
+                Password
               </label>
             </div>
             <div className="relative flex items-center border-b border-outline-variant transition-colors focus-within:border-primary amber-glow">
@@ -147,6 +150,8 @@ function LoginForm() {
           </span>
         </div>
       </div>
+
+      <RedirectOverlay isRedirecting={isRedirecting} />
     </div>
   )
 }

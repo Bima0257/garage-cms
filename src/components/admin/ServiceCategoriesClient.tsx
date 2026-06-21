@@ -12,9 +12,10 @@ import { safeImageSrc } from '@/lib/utils'
 
 interface ServiceCategoriesClientProps {
   initialCategories: ServiceCategory[]
+  serviceCountMap: Record<number, number>
 }
 
-export function ServiceCategoriesClient({ initialCategories }: ServiceCategoriesClientProps) {
+export function ServiceCategoriesClient({ initialCategories, serviceCountMap }: ServiceCategoriesClientProps) {
   const router = useRouter()
   const [categories, setCategories] = useState(initialCategories)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -81,6 +82,7 @@ export function ServiceCategoriesClient({ initialCategories }: ServiceCategories
           id={row.original.id}
           onEdit={handleEdit}
           onDelete={handleDelete}
+          deleteDisabled={(serviceCountMap[row.original.id] || 0) > 0}
         />
       ),
     },

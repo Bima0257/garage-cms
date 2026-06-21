@@ -10,6 +10,7 @@ interface ActionButtonsProps {
   onDelete: (id: number) => void
   onToggle?: (id: number, currentState: boolean) => void
   toggleState?: boolean
+  deleteDisabled?: boolean
 }
 
 export function ActionButtons({
@@ -18,6 +19,7 @@ export function ActionButtons({
   onDelete,
   onToggle,
   toggleState,
+  deleteDisabled,
 }: ActionButtonsProps) {
   const handleDelete = () => {
     Swal.fire({
@@ -64,8 +66,13 @@ export function ActionButtons({
       </button>
       <button
         onClick={handleDelete}
-        className="p-2 text-text-muted hover:text-accent-red transition-colors"
-        title="Hapus"
+        disabled={deleteDisabled}
+        className={`p-2 transition-colors ${
+          deleteDisabled
+            ? 'text-text-muted opacity-50 cursor-not-allowed'
+            : 'text-text-muted hover:text-accent-red'
+        }`}
+        title={deleteDisabled ? 'Tidak dapat dihapus (masih digunakan)' : 'Hapus'}
       >
         <IconTrash size={18} />
       </button>

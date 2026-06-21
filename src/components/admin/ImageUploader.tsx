@@ -70,6 +70,7 @@ export function ImageUploader({ value, onChange, folder = 'general' }: ImageUplo
             src={value}
             alt="Preview"
             fill
+            sizes="(max-width: 768px) 100vw, 600px"
             className="object-cover"
           />
           <button

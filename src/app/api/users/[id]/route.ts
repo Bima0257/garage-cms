@@ -94,6 +94,12 @@ export async function PUT(
       return NextResponse.json({ error: 'Failed to update profile' }, { status: 500 })
     }
 
+    // Update session with new data
+    if (validatedData.name) session.name = validatedData.name
+    if (validatedData.username) session.username = validatedData.username
+    if (validatedData.email !== undefined) session.email = validatedData.email
+    await session.save()
+
     return NextResponse.json({ message: 'Profile updated successfully' })
   } catch (error) {
     console.error('Error in PUT /api/users/[id]:', error)

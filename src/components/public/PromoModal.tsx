@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Image from 'next/image'
 import { IconX } from '@tabler/icons-react'
 import { safeImageSrc } from '@/lib/utils'
@@ -11,25 +11,28 @@ interface PromoModalProps {
 }
 
 export function PromoModal({ promotion }: PromoModalProps) {
+  const [isClient, setIsClient] = useState(false)
   const [isDismissed, setIsDismissed] = useState(false)
 
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   const isVisible = useMemo(() => {
-    if (!promotion || !promotion.is_active || isDismissed) return false
+    if (!isClient || !promotion || !promotion.is_active || isDismissed) return false
     const now = new Date()
     const startDate = new Date(promotion.start_date)
     const endDate = new Date(promotion.end_date)
     if (now >= startDate && now <= endDate) {
-      if (typeof window !== 'undefined') {
-        const dismissedKey = `promo_dismissed_${promotion.id}`
-        return !sessionStorage.getItem(dismissedKey)
-      }
+      const key = `promo_dismissed_${promotion.id}`
+      return !localStorage.getItem(key)
     }
     return false
-  }, [promotion, isDismissed])
+  }, [promotion, isDismissed, isClient])
 
   const handleDismiss = () => {
     if (promotion) {
-      sessionStorage.setItem(`promo_dismissed_${promotion.id}`, 'true')
+      localStorage.setItem(`promo_dismissed_${promotion.id}`, 'true')
     }
     setIsDismissed(true)
   }
@@ -39,10 +42,7 @@ export function PromoModal({ promotion }: PromoModalProps) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center">
       {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-        onClick={handleDismiss}
-      />
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
 
       {/* Modal Content */}
       <div className="relative z-10 max-w-2xl w-full mx-4 bg-surface-card border border-white/10 shadow-2xl">
@@ -61,6 +61,7 @@ export function PromoModal({ promotion }: PromoModalProps) {
               src={safeImageSrc(promotion.image)}
               alt={promotion.title}
               fill
+              sizes="(max-width: 768px) 100vw, 672px"
               className="object-cover"
             />
           </div>

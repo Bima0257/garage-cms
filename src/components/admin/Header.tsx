@@ -4,7 +4,11 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { IconSearch, IconBell } from '@tabler/icons-react'
 
-export function AdminHeader() {
+interface AdminHeaderProps {
+  unreadCount?: number
+}
+
+export function AdminHeader({ unreadCount = 0 }: AdminHeaderProps) {
   const [searchFocused, setSearchFocused] = useState(false)
   const [query, setQuery] = useState('')
   const router = useRouter()
@@ -45,9 +49,16 @@ export function AdminHeader() {
       {/* Right side */}
       <div className="flex items-end">
         {/* Notifications */}
-        <button className="relative text-text-secondary hover:text-primary transition-colors">
+        <button
+          onClick={() => router.push('/admin/pesan')}
+          className="relative text-text-secondary hover:text-primary transition-colors"
+        >
           <IconBell size={22} />
-          <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary border border-background rounded-full" />
+          {unreadCount > 0 && (
+            <span className="absolute -top-2 -right-2 min-w-[18px] h-[18px] bg-primary text-on-primary text-[10px] font-bold flex items-center justify-center rounded-full border border-background px-1">
+              {unreadCount > 99 ? '99+' : unreadCount}
+            </span>
+          )}
         </button>
       </div>
     </header>

@@ -29,6 +29,7 @@ export function ServiceCard({ service, whatsapp, onWhatsAppClick }: ServiceCardP
           src={safeImageSrc(service.image)}
           alt={service.name}
           fill
+          sizes="(max-width: 768px) 100vw, 400px"
           className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
         />
 

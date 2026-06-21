@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { IconPackage, IconTool, IconArticle, IconBrandWhatsapp, IconArrowRight } from '@tabler/icons-react'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import type { ContactMessage } from '@/types/database.types'
 
 export default async function AdminDashboardPage() {
-  const supabase = await createClient()
+  const supabase = createAdminClient()
 
   // Fetch counts
   const [

@@ -76,8 +76,22 @@ export function FormDialog({
   }, [isOpen, onClose])
 
   const handleFormSubmit = async (data: Record<string, unknown>) => {
+    const sanitized: Record<string, unknown> = {}
+    for (const key in data) {
+      let val = data[key]
+      if (typeof val === 'number' && isNaN(val)) {
+        val = null
+      }
+      if (val === '' && key !== 'name' && key !== 'slug' && key !== 'username' && key !== 'password') {
+        val = null
+      }
+      if (key === 'category_id' && typeof val === 'string' && val !== '') {
+        val = parseInt(val, 10)
+      }
+      sanitized[key] = val
+    }
     try {
-      await onSubmit(data)
+      await onSubmit(sanitized)
       onClose()
       reset()
       Swal.fire({

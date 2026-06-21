@@ -12,4 +12,6 @@ export { HeroesClient } from './HeroesClient'
 export { ModalPromotionsClient } from './ModalPromotionsClient'
 export { SiteSettingsClient } from './SiteSettingsClient'
 export { SocialMediaClient } from './SocialMediaClient'
+export { RouteProgressBar } from './RouteProgressBar'
+export { RedirectOverlay } from './RedirectOverlay'
 

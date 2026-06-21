@@ -12,6 +12,7 @@ import { safeImageSrc } from '@/lib/utils'
 
 interface ProductCategoriesClientProps {
   initialCategories: ProductCategory[]
+  productCountMap: Record<number, number>
 }
 
 // Helper function to generate slug from name
@@ -24,7 +25,7 @@ function generateSlug(name: string): string {
     .trim()
 }
 
-export function ProductCategoriesClient({ initialCategories }: ProductCategoriesClientProps) {
+export function ProductCategoriesClient({ initialCategories, productCountMap }: ProductCategoriesClientProps) {
   const router = useRouter()
   const [categories, setCategories] = useState(initialCategories)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -95,6 +96,7 @@ export function ProductCategoriesClient({ initialCategories }: ProductCategories
           id={row.original.id}
           onEdit={handleEdit}
           onDelete={handleDelete}
+          deleteDisabled={(productCountMap[row.original.id] || 0) > 0}
         />
       ),
     },

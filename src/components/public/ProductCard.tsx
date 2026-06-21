@@ -39,6 +39,7 @@ export function ProductCard({ product, whatsapp, onWhatsAppClick }: ProductCardP
           src={safeImageSrc(product.image)}
           alt={product.name}
           fill
+          sizes="(max-width: 768px) 50vw, 300px"
           className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
         />
 
