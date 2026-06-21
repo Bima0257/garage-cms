@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { Navbar, Footer, PromoModal, ScrollToTop } from '@/components/public'
+import { PageLoader } from '@/components/PageLoader'
 import { IconBrandWhatsapp } from '@tabler/icons-react'
 import type { Settings, About, SocialMedia, ModalPromotion } from '@/types/database.types'
 
@@ -46,6 +47,7 @@ export default async function PublicLayout({
 
   return (
     <div className="min-h-screen flex flex-col">
+      <PageLoader />
       {/* Atmospheric blobs */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full" />

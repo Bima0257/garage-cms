@@ -1,7 +1,8 @@
 import { redirect } from 'next/navigation'
 import { getSession } from '@/lib/session'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { AdminSidebar, AdminHeader, RouteProgressBar } from '@/components/admin'
+import { AdminSidebar, AdminHeader } from '@/components/admin'
+import { PageLoader } from '@/components/PageLoader'
 
 export default async function AdminDashboardLayout({
   children,
@@ -22,7 +23,7 @@ export default async function AdminDashboardLayout({
 
   return (
     <div className="min-h-screen bg-background">
-      <RouteProgressBar />
+      <PageLoader />
       {/* Sidebar */}
       <AdminSidebar user={{ name: session.name, photo: session.photo }} />
 

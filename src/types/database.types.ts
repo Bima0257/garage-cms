@@ -184,7 +184,6 @@ export type Database = {
           created_at: string | null
           description: string | null
           id: number
-          image: string | null
           is_active: boolean | null
           name: string
           slug: string
@@ -195,7 +194,6 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: number
-          image?: string | null
           is_active?: boolean | null
           name: string
           slug: string
@@ -206,7 +204,6 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: number
-          image?: string | null
           is_active?: boolean | null
           name?: string
           slug?: string
@@ -269,7 +266,6 @@ export type Database = {
           created_at: string | null
           description: string | null
           id: number
-          image: string | null
           is_active: boolean | null
           name: string
           sort_order: number | null
@@ -279,7 +275,6 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: number
-          image?: string | null
           is_active?: boolean | null
           name: string
           sort_order?: number | null
@@ -289,7 +284,6 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: number
-          image?: string | null
           is_active?: boolean | null
           name?: string
           sort_order?: number | null

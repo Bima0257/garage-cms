@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const modalPromotionSchema = z.object({
+export const baseModalPromotionSchema = z.object({
   id: z.number().optional(),
   title: z.string().min(1, 'Title is required').max(255),
   description: z.string().optional().nullable(),
@@ -13,7 +13,9 @@ export const modalPromotionSchema = z.object({
   start_date: z.string().min(1, 'Start date is required'),
   end_date: z.string().min(1, 'End date is required'),
   is_active: z.boolean().default(true),
-}).refine(
+})
+
+export const modalPromotionSchema = baseModalPromotionSchema.refine(
   (data) => {
     const start = new Date(data.start_date)
     const end = new Date(data.end_date)

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const productSchema = z.object({
+export const baseProductSchema = z.object({
   id: z.number().optional(),
   name: z.string().min(1, 'Name is required').max(255),
   slug: z.string().min(1, 'Slug is required').max(255)
@@ -14,7 +14,9 @@ export const productSchema = z.object({
   category_id: z.number().optional().nullable(),
   is_featured: z.boolean().default(false),
   is_active: z.boolean().default(true),
-}).refine(
+})
+
+export const productSchema = baseProductSchema.refine(
   (data) => {
     if (data.discount_price !== null && data.discount_price !== undefined) {
       return data.discount_price <= data.price

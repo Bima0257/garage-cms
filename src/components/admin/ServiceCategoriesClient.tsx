@@ -2,13 +2,11 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
 import { IconPlus, IconCategory } from '@tabler/icons-react'
 import type { ColumnDef } from '@tanstack/react-table'
 import { DataTable, FormDialog, ActionButtons } from '@/components/admin'
 import { serviceCategorySchema } from '@/lib/validations/service-category'
 import type { ServiceCategory } from '@/types/database.types'
-import { safeImageSrc } from '@/lib/utils'
 
 interface ServiceCategoriesClientProps {
   initialCategories: ServiceCategory[]
@@ -23,21 +21,6 @@ export function ServiceCategoriesClient({ initialCategories, serviceCountMap }: 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const columns: ColumnDef<ServiceCategory, unknown>[] = [
-    {
-      accessorKey: 'image',
-      header: 'Gambar',
-      cell: ({ row }) => (
-        <div className="w-16 h-12 bg-surface border border-outline-variant overflow-hidden">
-          <Image
-            src={safeImageSrc(row.original.image)}
-            alt={row.original.name}
-            width={64}
-            height={48}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      ),
-    },
     {
       accessorKey: 'name',
       header: 'Nama',
@@ -91,7 +74,6 @@ export function ServiceCategoriesClient({ initialCategories, serviceCountMap }: 
   const fields = [
     { name: 'name', label: 'Nama Kategori', type: 'text' as const, required: true },
     { name: 'description', label: 'Deskripsi', type: 'textarea' as const },
-    { name: 'image', label: 'Gambar', type: 'image' as const },
     { name: 'sort_order', label: 'Urutan', type: 'number' as const },
     { name: 'is_active', label: 'Aktif', type: 'checkbox' as const },
   ]

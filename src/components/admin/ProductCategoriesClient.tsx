@@ -2,13 +2,11 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
 import { IconPlus, IconPackage } from '@tabler/icons-react'
 import type { ColumnDef } from '@tanstack/react-table'
 import { DataTable, FormDialog, ActionButtons } from '@/components/admin'
 import { productCategorySchema } from '@/lib/validations/product-category'
 import type { ProductCategory } from '@/types/database.types'
-import { safeImageSrc } from '@/lib/utils'
 
 interface ProductCategoriesClientProps {
   initialCategories: ProductCategory[]
@@ -33,21 +31,6 @@ export function ProductCategoriesClient({ initialCategories, productCountMap }: 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const columns: ColumnDef<ProductCategory, unknown>[] = [
-    {
-      accessorKey: 'image',
-      header: 'Gambar',
-      cell: ({ row }) => (
-        <div className="w-16 h-12 bg-surface border border-outline-variant overflow-hidden">
-          <Image
-            src={safeImageSrc(row.original.image)}
-            alt={row.original.name}
-            width={64}
-            height={48}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      ),
-    },
     {
       accessorKey: 'name',
       header: 'Nama',
@@ -106,7 +89,6 @@ export function ProductCategoriesClient({ initialCategories, productCountMap }: 
     { name: 'name', label: 'Nama Kategori', type: 'text' as const, required: true },
     { name: 'slug', label: 'Slug (otomatis jika kosong)', type: 'text' as const, required: false },
     { name: 'description', label: 'Deskripsi', type: 'textarea' as const },
-    { name: 'image', label: 'Gambar', type: 'image' as const },
     { name: 'sort_order', label: 'Urutan', type: 'number' as const },
     { name: 'is_active', label: 'Aktif', type: 'checkbox' as const },
   ]

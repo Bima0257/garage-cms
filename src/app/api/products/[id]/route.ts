@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { productSchema } from '@/lib/validations/product'
+import { baseProductSchema } from '@/lib/validations/product'
 import { requireAuth } from '@/lib/session'
 import { revalidatePath } from 'next/cache'
 
@@ -12,7 +12,7 @@ export async function PUT(
     if (!(await requireAuth())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const { id } = await params
     const body = await request.json()
-    const validated = productSchema.partial().parse(body)
+    const validated = baseProductSchema.partial().parse(body)
 
     const adminClient = createAdminClient()
     const { data, error } = await adminClient

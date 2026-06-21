@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { modalPromotionSchema } from '@/lib/validations/modal-promotion'
+import { baseModalPromotionSchema } from '@/lib/validations/modal-promotion'
 import { requireAuth } from '@/lib/session'
 import { revalidatePath } from 'next/cache'
 
@@ -12,7 +12,7 @@ export async function PUT(
     if (!(await requireAuth())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const { id } = await params
     const body = await request.json()
-    const validated = modalPromotionSchema.partial().parse(body)
+    const validated = baseModalPromotionSchema.partial().parse(body)
 
     const adminClient = createAdminClient()
     const { data, error } = await adminClient
