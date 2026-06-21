@@ -80,6 +80,7 @@ export function PromoModal({ promotion }: PromoModalProps) {
           {promotion.button_text && promotion.button_url && (
             <a
               href={promotion.button_url}
+              onClick={handleDismiss}
               className="inline-block bg-primary text-on-primary px-10 py-4 font-bold uppercase tracking-widest hover:bg-primary-container transition-colors"
             >
               {promotion.button_text}

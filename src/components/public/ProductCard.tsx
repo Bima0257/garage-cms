@@ -32,7 +32,7 @@ export function ProductCard({ product, whatsapp, onWhatsAppClick }: ProductCardP
   }
 
   return (
-    <div className="bg-surface-card border border-white/10 group relative overflow-hidden transition-all duration-500 hover:border-primary/30">
+    <div className="bg-surface-card border border-white/10 group relative overflow-hidden transition-all duration-500 hover:border-primary/30 flex flex-col h-full">
       {/* Image */}
       <div className="relative aspect-square overflow-hidden">
         <Image
@@ -57,7 +57,7 @@ export function ProductCard({ product, whatsapp, onWhatsAppClick }: ProductCardP
       </div>
 
       {/* Content */}
-      <div className="p-3 sm:p-4 md:p-6">
+      <div className="p-3 sm:p-4 md:p-6 flex flex-col flex-1">
         <h3 className="font-[var(--font-headline-md)] text-[var(--font-size-headline-sm)] sm:text-[var(--font-size-headline-md)] uppercase group-hover:text-primary transition-colors mb-1 sm:mb-2">
           {product.name}
         </h3>
@@ -84,7 +84,7 @@ export function ProductCard({ product, whatsapp, onWhatsAppClick }: ProductCardP
         {/* CTA */}
         <button
           onClick={handleWhatsApp}
-          className="w-full bg-primary text-on-primary font-bold py-2 sm:py-3 uppercase flex items-center justify-center gap-2 hover:bg-primary-container transition-colors active:scale-[0.98] text-xs sm:text-sm"
+          className="w-full bg-primary text-on-primary font-bold py-2 sm:py-3 uppercase flex items-center justify-center gap-2 hover:bg-primary-container transition-colors active:scale-[0.98] text-xs sm:text-sm mt-auto"
         >
           <IconBrandWhatsapp size={16} className="sm:hidden" />
           <IconBrandWhatsapp size={18} className="hidden sm:block" />
